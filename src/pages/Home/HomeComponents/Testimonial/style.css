@@ -1,0 +1,8 @@
+.custom-rating .MuiRating-iconFilled {
+    color: green; /* Changes the color of filled stars to green */
+  }
+  
+  .custom-rating .MuiRating-iconEmpty {
+    color: lightgray; /* Optional: Changes the color of empty stars */
+  }
+  

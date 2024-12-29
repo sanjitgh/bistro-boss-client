@@ -7,6 +7,7 @@ import { Navigation } from "swiper/modules";
 import { FaQuoteLeft } from "react-icons/fa";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import "./style.css";
 
 const Testimonial = () => {
   const [items, setItems] = useState([]);
@@ -28,7 +29,7 @@ const Testimonial = () => {
               <SwiperSlide key={item._id}>
                 <div className="px-10 text-center max-w-[1100px] mx-auto">
                   <Rating
-                    className="mx-auto mb-4"
+                    className="mx-auto mb-4 custom-rating "
                     style={{ maxWidth: 180 }}
                     value={item.rating}
                     readOnly
