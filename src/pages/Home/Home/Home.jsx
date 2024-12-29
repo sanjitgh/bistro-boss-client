@@ -6,6 +6,7 @@ import PopularMenu from "../HomeComponents/PopularMenu/PopularMenu";
 import ContactUs from "../HomeComponents/ContactUs/ContactUs";
 import ChefProduct from "../HomeComponents/ChefProduct/ChefProduct";
 import FromOurMenu from "../HomeComponents/FromOurMenu/FromOurMenu";
+import Testimonial from "../HomeComponents/Testimonial/Testimonial";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <ContactUs></ContactUs>
       <ChefProduct></ChefProduct>
       <FromOurMenu></FromOurMenu>
+      <Testimonial></Testimonial>
     </>
   );
 };
