@@ -11,7 +11,6 @@ const Banner = () => {
     <Carousel
       showArrows={false}
       transitionTime={1000}
-      infiniteLoop={true}
       className="text-center"
     >
       <div>
