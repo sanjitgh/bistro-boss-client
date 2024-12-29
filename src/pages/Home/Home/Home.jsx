@@ -5,6 +5,7 @@ import BistroBoss from "../HomeComponents/BistroBoss/BistroBoss";
 import PopularMenu from "../HomeComponents/PopularMenu/PopularMenu";
 import ContactUs from "../HomeComponents/ContactUs/ContactUs";
 import ChefProduct from "../HomeComponents/ChefProduct/ChefProduct";
+import FromOurMenu from "../HomeComponents/FromOurMenu/FromOurMenu";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <PopularMenu></PopularMenu>
       <ContactUs></ContactUs>
       <ChefProduct></ChefProduct>
+      <FromOurMenu></FromOurMenu>
     </>
   );
 };

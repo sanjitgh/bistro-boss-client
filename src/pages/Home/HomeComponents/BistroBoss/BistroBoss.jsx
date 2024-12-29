@@ -7,7 +7,7 @@ const BistroBoss = () => {
   return (
     <section className="py-10">
       <div
-        className={`max-w-screen-xl mx-auto bg-[url('https://i.ibb.co.com/z8ZtVwD/pexels-noah-erickson-97554-404280.jpg')] bg-center bg-cover p-28`}
+        className={`max-w-screen-xl mx-auto bg-center bg-cover p-28`}
         style={backgroundStyle}
       >
         <div className="py-24 bg-white text-center ">
