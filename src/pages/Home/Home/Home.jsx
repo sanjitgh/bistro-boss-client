@@ -4,6 +4,7 @@ import Category from "../HomeComponents/Category/Category";
 import BistroBoss from "../HomeComponents/BistroBoss/BistroBoss";
 import PopularMenu from "../HomeComponents/PopularMenu/PopularMenu";
 import ContactUs from "../HomeComponents/ContactUs/ContactUs";
+import ChefProduct from "../HomeComponents/ChefProduct/ChefProduct";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <BistroBoss></BistroBoss>
       <PopularMenu></PopularMenu>
       <ContactUs></ContactUs>
+      <ChefProduct></ChefProduct>
     </>
   );
 };
