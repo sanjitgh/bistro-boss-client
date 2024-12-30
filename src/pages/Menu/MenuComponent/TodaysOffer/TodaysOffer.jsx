@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../../../../components/Button/Button";
 import SectionTitle from "../../../../components/SecitonTitle/SectionTitle";
 import MenuItem from "../../../shared/MenuItem/MenuItem";
@@ -15,7 +16,9 @@ const TodaysOffer = ({ offered }) => {
             <MenuItem key={item._id} item={item}></MenuItem>
           ))}
         </div>
-        <Button buttonContent={"ORDER YOUR FAVOURITE FOOD"}></Button>
+        <Link to={`/our-shop/offered`}>
+          <Button buttonContent={"ORDER YOUR FAVOURITE FOOD"}></Button>
+        </Link>
       </div>
     </section>
   );

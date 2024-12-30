@@ -1,5 +1,6 @@
 import MenuItem from "../../../shared/MenuItem/MenuItem";
 import Button from "../../../../components/Button/Button";
+import { Link } from "react-router-dom";
 
 const Soup = ({ soup }) => {
   return (
@@ -9,7 +10,9 @@ const Soup = ({ soup }) => {
           <MenuItem key={item._id} item={item}></MenuItem>
         ))}
       </div>
-      <Button buttonContent={"ORDER YOUR FAVOURITE FOOD"}></Button>
+      <Link to={`/our-shop/soup`}>
+        <Button buttonContent={"ORDER YOUR FAVOURITE FOOD"}></Button>
+      </Link>
     </div>
   );
 };
