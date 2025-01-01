@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../provaiders/AuthProvaider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
   const links = (
     <>
-      <Link to={'/'}>Home</Link>
-      <Link to={'/menu'}>Menu</Link>
-      <Link to={'/our-shop/all'}>Our Shop</Link>
-      <Link to={'/login'}>Login</Link>
+      <Link to={"/"}>Home</Link>
+      <Link to={"/menu"}>Menu</Link>
+      <Link to={"/our-shop/all"}>Our Shop</Link>
+      <Link to={"/secret"}>Secret</Link>
+      {user ? (
+        <button onClick={() => logOut()} className="btn btn-sm">
+          Logout
+        </button>
+      ) : (
+        <Link to={"/login"}>Login</Link>
+      )}
     </>
   );
   return (
@@ -41,7 +50,9 @@ const Navbar = () => {
           <a className="btn btn-ghost text-xl">daisyUI</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu gap-5 menu-horizontal px-1">{links}</ul>
+          <ul className="menu items-center gap-5 menu-horizontal px-1">
+            {links}
+          </ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Button</a>
