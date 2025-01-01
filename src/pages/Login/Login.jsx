@@ -7,6 +7,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../provaiders/AuthProvaider";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -22,10 +23,9 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    signIn(email, password)
-        .then(result => {
-            console.log(result.user);
-        })
+    signIn(email, password).then((result) => {
+      console.log(result.user);
+    });
   };
 
   const handleValidCaptcha = () => {
@@ -99,6 +99,14 @@ const Login = () => {
                   value={"Login"}
                   className="btn"
                 />
+              </div>
+              <div className="form-control mt-6">
+                <p>
+                  Are you new here?{" "}
+                  <Link to={"/signUp"} className="link">
+                    <b>Sign Up</b>
+                  </Link>
+                </p>
               </div>
             </form>
           </div>
