@@ -8,7 +8,7 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../provaiders/AuthProvaider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -16,6 +16,8 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const from = location.state?.from?.pathname || "/";
+  
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -25,21 +27,28 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    signIn(email, password).then((result) => {
-      Swal.fire({
-        position: "top-center",
-        icon: "success",
-        title: "Login Successfull.",
-        showConfirmButton: false,
-        timer: 1500
+    signIn(email, password)
+      .then(() => {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Login Successfull.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        if (from) {
+          navigate(from);
+        } 
+      })
+      .catch(() => {
+        Swal.fire({
+          position: "top-center",
+          icon: "error",
+          title: "Login Faild.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
-      if (location.state){
-        navigate(location.state);
-      }
-      else{
-        navigate("/");
-      }
-    });
   };
 
   const handleValidCaptcha = (e) => {

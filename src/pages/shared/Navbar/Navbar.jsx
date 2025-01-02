@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provaiders/AuthProvaider";
-
+import { PiShoppingCartSimple } from "react-icons/pi";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const links = (
@@ -21,7 +21,7 @@ const Navbar = () => {
   );
   return (
     <div className="z-10 bg-[#0000003b] text-white fixed w-full">
-      <div className="navbar">
+      <div className="navbar md:px-8">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -55,7 +55,10 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          <Link className="relative ">
+          <PiShoppingCartSimple className="text-4xl" />
+            <div className="rounded-full absolute -bottom-2 -right-3 text-[10px] bg-red-600 p-1">+0</div>
+          </Link>
         </div>
       </div>
     </div>
