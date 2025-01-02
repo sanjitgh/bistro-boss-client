@@ -2,8 +2,11 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provaiders/AuthProvaider";
 import { PiShoppingCartSimple } from "react-icons/pi";
+import useCart from "../../../hooks/useCart";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
+
   const links = (
     <>
       <Link to={"/"}>Home</Link>
@@ -20,8 +23,8 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="z-10 bg-[#0000003b] text-white fixed w-full">
-      <div className="navbar md:px-8">
+    <header className="z-10 bg-[#00000060] text-white fixed w-full">
+      <div className="navbar md:px-10 px-3">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -47,7 +50,7 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="btn btn-ghost text-xl">BistroBoss</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu items-center gap-5 menu-horizontal px-1">
@@ -56,12 +59,16 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           <Link className="relative ">
-          <PiShoppingCartSimple className="text-4xl" />
-            <div className="rounded-full absolute -bottom-2 -right-3 text-[10px] bg-red-600 p-1">+0</div>
+            <PiShoppingCartSimple className="text-4xl" />
+            <div className="rounded-full absolute -bottom-2 -right-3 text-[10px] bg-red-600 p-1">
+              <div className="w-3 h-3 flex justify-center items-center">
+                {cart?.length}
+              </div>
+            </div>
           </Link>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
