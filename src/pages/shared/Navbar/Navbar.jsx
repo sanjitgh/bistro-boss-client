@@ -23,7 +23,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <header className="z-10 bg-[#00000060] text-white fixed w-full">
+    <header className="z-[9999999] bg-[#00000060] text-white fixed w-full">
       <div className="navbar md:px-10 px-3">
         <div className="navbar-start">
           <div className="dropdown">
@@ -58,7 +58,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <Link className="relative ">
+          <Link to={'/dashboard/cart'} className="relative ">
             <PiShoppingCartSimple className="text-4xl" />
             <div className="rounded-full absolute -bottom-2 -right-3 text-[10px] bg-red-600 p-1">
               <div className="w-3 h-3 flex justify-center items-center">
