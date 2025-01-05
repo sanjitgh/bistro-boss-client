@@ -5,8 +5,11 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../provaiders/AuthProvaider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import GoogleLogin from "../components/SocialLogin/GoogleLogin";
 
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -19,15 +22,22 @@ const SignUp = () => {
   const onSubmit = (data) => {
     createUser(data.email, data.password).then(() => {
       updateUserProfile(data.name, data.photo).then(() => {
-        reset();
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Sign Up Successfully Done.",
-          showConfirmButton: false,
-          timer: 1500,
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: "Sign Up Successfully Done.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          }
         });
-        navigate("/");
       });
     });
   };
@@ -119,6 +129,9 @@ const SignUp = () => {
               </div>
               <div className="form-control mt-6">
                 <input type="submit" value={"Sign Up"} className="btn " />
+              </div>
+              <div className="form-control mt-6">
+                <GoogleLogin></GoogleLogin>
               </div>
               <div className="form-control mt-6">
                 <p>

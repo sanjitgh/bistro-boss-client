@@ -6,12 +6,13 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { AuthContext } from "../../provaiders/AuthProvaider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import GoogleLogin from "../../components/SocialLogin/GoogleLogin";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn } = useAuth();
   const [disable, setDisable] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
@@ -115,6 +116,9 @@ const Login = () => {
                   value={"Login"}
                   className="btn"
                 />
+              </div>
+              <div className="form-control mt-6">
+                <GoogleLogin></GoogleLogin>
               </div>
               <div className="form-control mt-6">
                 <p>
