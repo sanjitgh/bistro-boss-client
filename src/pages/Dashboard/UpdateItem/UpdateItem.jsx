@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../components/SecitonTitle/SectionTitle";
-import { GiForkKnifeSpoon } from "react-icons/gi";
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
-import { PiFanFill } from "react-icons/pi";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { GiForkKnifeSpoon } from "react-icons/gi";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { PiFanFill } from "react-icons/pi";
 
 const imageHoastinKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHoastinKey}`;
 
-const AddItem = () => {
+const UpdateItem = () => {
+  const { name, category, price, recipe, _id } = useLoaderData();
   const [loading, setLoading] = useState(false);
-  const { handleSubmit, reset, register } = useForm();
+  const { handleSubmit, register } = useForm();
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
@@ -26,6 +28,7 @@ const AddItem = () => {
         "content-type": "multipart/form-data",
       },
     });
+
     if (res.data.success) {
       const menuItem = {
         name: data.name,
@@ -34,30 +37,29 @@ const AddItem = () => {
         category: data.category,
         price: parseFloat(data.price),
       };
-      const menuRes = await axiosSecure.post("/menu", menuItem);
-      if (menuRes.data.insertedId) {
+      const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem);
+      console.log(menuRes.data);
+      if (menuRes.data.matchedCount > 0) {
         Swal.fire({
           position: "top-center",
           icon: "success",
-          title: "Menu Added Successfully Done!",
+          title: `${data.name} updated Successfully!`,
           showConfirmButton: false,
           timer: 1500,
         });
-        reset();
       }
       setLoading(false);
     }
   };
-
   return (
     <>
       <Helmet>
-        <title>Add Menu | Dashboard</title>
+        <title>Update Menu | Dashboard</title>
       </Helmet>
       <div className="py-10">
         <SectionTitle
           subTitle={"---What's new?---"}
-          title={"ADD AN ITEM"}
+          title={"UPDATE AN ITEM"}
         ></SectionTitle>
         <div className="bg-gray-200 p-10">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -67,6 +69,7 @@ const AddItem = () => {
                 <span className="label-text">Recipe name*</span>
               </label>
               <input
+                defaultValue={name}
                 {...register("name", { required: true })}
                 type="text"
                 placeholder="Recipe name"
@@ -81,7 +84,7 @@ const AddItem = () => {
                 </label>
                 <select
                   {...register("category", { required: true })}
-                  defaultValue={"default"}
+                  defaultValue={category}
                   className="select w-full capitalize"
                 >
                   <option disabled value={"default"}>
@@ -101,6 +104,7 @@ const AddItem = () => {
                   <span className="label-text">Price*</span>
                 </label>
                 <input
+                  defaultValue={price}
                   {...register("price", { required: true })}
                   type="number"
                   placeholder="Price"
@@ -113,6 +117,7 @@ const AddItem = () => {
                 <span className="label-text">Recipe Details*</span>
               </label>
               <textarea
+                defaultValue={recipe}
                 {...register("recipe", { required: true })}
                 className="textarea textarea-bordered h-36"
                 placeholder="Recipe Details"
@@ -136,7 +141,7 @@ const AddItem = () => {
                   <PiFanFill className="animate-spin" />
                 ) : (
                   <>
-                    Add Item <GiForkKnifeSpoon />
+                    Update Item <GiForkKnifeSpoon />
                   </>
                 )}
               </button>
@@ -148,4 +153,4 @@ const AddItem = () => {
   );
 };
 
-export default AddItem;
+export default UpdateItem;

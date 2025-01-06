@@ -5,6 +5,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const ManageItem = () => {
   const [menu, refetch] = useMenu();
@@ -21,8 +22,7 @@ const ManageItem = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiousSecure.delete(`/menu/${item._id}`)
-        .then((res) => {
+        axiousSecure.delete(`/menu/${item._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             Swal.fire({
               title: "Deleted!",
@@ -70,12 +70,13 @@ const ManageItem = () => {
                     <td>{item.name}</td>
                     <td>${item.price}</td>
                     <td>
-                      <button
-                        onClick={() => handleUpdate(item._id)}
-                        className="bg-[#D1A054] text-white text-lg p-2 rounded"
-                      >
-                        <FiEdit />
-                      </button>
+                      <Link to={`/dashboard/updateitem/${item._id}`}>
+                        <button
+                          className="bg-[#D1A054] text-white text-lg p-2 rounded"
+                        >
+                          <FiEdit />
+                        </button>
+                      </Link>
                     </td>
                     <td>
                       <button
