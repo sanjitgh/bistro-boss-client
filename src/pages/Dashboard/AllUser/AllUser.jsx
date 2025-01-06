@@ -17,17 +17,28 @@ const AllUser = () => {
   });
 
   const handleMakeAdmin = (id) => {
-    axiousSecure.patch(`/users/admin/${id}`).then((res) => {
-      console.log(res.data);
-      if (res.data.matchedCount > 0) {
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: `${users.name} is admin now!`,
-          showConfirmButton: false,
-          timer: 1500,
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Admin",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiousSecure.patch(`/users/admin/${id}`).then((res) => {
+          if (res.data.matchedCount > 0) {
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: `${users.name} is admin now!`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            refetch();
+          }
         });
-        refetch();
       }
     });
   };
