@@ -4,6 +4,7 @@ import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -44,7 +45,15 @@ const Cart = () => {
           <div className="flex items-center justify-between mb-10">
             <h1 className="text-2xl font-bold">Total Order : {cart.length}</h1>
             <h1 className="text-2xl font-bold">Total Price : $ {totalPrice}</h1>
-            <button className="btn">Pay</button>
+            {cart.length > 0 ? (
+              <Link to={"/dashboard/payment"}>
+                <button className="btn">Pay</button>
+              </Link>
+            ) : (
+              <button disabled className="btn">
+                Pay
+              </button>
+            )}
           </div>
           <div className="overflow-x-auto max-h-96 relative">
             <table className="table">
@@ -59,31 +68,37 @@ const Cart = () => {
                 </tr>
               </thead>
               <tbody className="max-h-80">
-                {cart.map((item, idx) => (
-                  <tr key={item._id}>
-                    <td>{idx + 1}</td>
-                    <td>
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
-                          <img
-                            src={item.image}
-                            alt="Avatar Tailwind CSS Component"
-                          />
-                        </div>
-                      </div>
-                    </td>
-                    <td>{item.name}</td>
-                    <td>{item.price}</td>
-                    <td>
-                      <button
-                        onClick={() => handleDelete(item._id)}
-                        className="bg-red-500 text-white text-lg p-2 rounded"
-                      >
-                        <FaRegTrashAlt />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {cart.length > 0 ? (
+                  <>
+                    {cart.map((item, idx) => (
+                      <tr key={item._id}>
+                        <td>{idx + 1}</td>
+                        <td>
+                          <div className="avatar">
+                            <div className="mask mask-squircle h-12 w-12">
+                              <img
+                                src={item.image}
+                                alt="Avatar Tailwind CSS Component"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td>{item.name}</td>
+                        <td>{item.price}</td>
+                        <td>
+                          <button
+                            onClick={() => handleDelete(item._id)}
+                            className="bg-red-500 text-white text-lg p-2 rounded"
+                          >
+                            <FaRegTrashAlt />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </>
+                ) : (
+                  <tr><td className="text-center font-bold text-2xl" colSpan={5}>No Cart Available</td></tr>
+                )}
               </tbody>
             </table>
           </div>
