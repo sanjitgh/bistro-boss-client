@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
   const [error, setError] = useState("");
@@ -14,6 +15,7 @@ const CheckoutForm = () => {
   const axiosSecure = useAxiosSecure();
   const [cart] = useCart();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
@@ -89,10 +91,13 @@ const CheckoutForm = () => {
         const res = await axiosSecure.post("/payments", payment);
         if(res.data?.paymentResult?.insertedId){
           Swal.fire({
-            title: "Payment Successfully Done!",
+            position: "top-center",
             icon: "success",
-            draggable: true
+            title: "Payment Successfully Done!",
+            showConfirmButton: false,
+            timer: 1500
           });
+          navigate('/dashboard/payment-history')
         }
       }
     }
@@ -100,7 +105,7 @@ const CheckoutForm = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="max-w-5xl mx-auto mt-14">
         <CardElement
           options={{
             style: {
@@ -127,11 +132,6 @@ const CheckoutForm = () => {
             Pay
           </button>
           <p className="text-red-600 mt-5">{error}</p>
-          {transactionId && (
-            <p className="text-green-600 mt-5">
-              Transaction Id : {transactionId}
-            </p>
-          )}
         </div>
       </form>
     </div>

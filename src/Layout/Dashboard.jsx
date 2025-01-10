@@ -10,7 +10,7 @@ import { IoStarHalf } from "react-icons/io5";
 import { TbBrandBooking } from "react-icons/tb";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GiForkKnifeSpoon } from "react-icons/gi";
-import { MdOutlineManageSearch } from "react-icons/md";
+import { MdOutlineManageSearch, MdOutlinePayments } from "react-icons/md";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import useAdmin from "../hooks/useAdmin";
 
@@ -108,6 +108,10 @@ const Dashboard = () => {
               <li className="flex items-center gap-2">
                 <FaCalendar></FaCalendar>
                 <NavLink to={"/dashboard/reservation"}>Reservation</NavLink>
+              </li>
+              <li className="flex items-center gap-2">
+                <MdOutlinePayments />
+                <NavLink to={"/dashboard/payment-history"}>Payment history</NavLink>
               </li>
               <li className="flex items-center gap-2">
                 <IoStarHalf />
