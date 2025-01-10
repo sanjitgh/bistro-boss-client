@@ -97,9 +97,11 @@ const Dashboard = () => {
               <li className="flex items-center gap-2">
                 <FaHome></FaHome>
                 <NavLink
-                  to={"/dashboard/userHome"}
+                  to={"/dashboard/userhome"}
                   className={({ isActive }) =>
-                    isActive ? "text-orange-500" : ""
+                    isActive
+                      ? "text-white flex items-center gap-3"
+                      : "flex items-center gap-3"
                   }
                 >
                   User Home
@@ -107,23 +109,45 @@ const Dashboard = () => {
               </li>
               <li className="flex items-center gap-2">
                 <FaCalendar></FaCalendar>
-                <NavLink to={"/dashboard/reservation"}>Reservation</NavLink>
+                <NavLink className={({ isActive }) =>
+                    isActive
+                      ? "text-white flex items-center gap-3"
+                      : "flex items-center gap-3"
+                  } to={"/dashboard/reservation"}>Reservation</NavLink>
               </li>
               <li className="flex items-center gap-2">
                 <MdOutlinePayments />
-                <NavLink to={"/dashboard/payment-history"}>Payment history</NavLink>
+                <NavLink className={({ isActive }) =>
+                    isActive
+                      ? "text-white flex items-center gap-3"
+                      : "flex items-center gap-3"
+                  } to={"/dashboard/payment-history"}>
+                  Payment history
+                </NavLink>
               </li>
               <li className="flex items-center gap-2">
                 <IoStarHalf />
-                <NavLink to={"/dashboard/reviews"}>add review</NavLink>
+                <NavLink className={({ isActive }) =>
+                    isActive
+                      ? "text-white flex items-center gap-3"
+                      : "flex items-center gap-3"
+                  } to={"/dashboard/reviews"}>add review</NavLink>
               </li>
               <li className="flex items-center gap-2">
                 <FaOpencart />
-                <NavLink to={"/dashboard/cart"}>My Cart</NavLink>
+                <NavLink className={({ isActive }) =>
+                    isActive
+                      ? "text-white flex items-center gap-3"
+                      : "flex items-center gap-3"
+                  } to={"/dashboard/cart"}>My Cart</NavLink>
               </li>
               <li className="flex items-center gap-2">
                 <TbBrandBooking />
-                <NavLink to={"/dashboard/bookings"}>My booking</NavLink>
+                <NavLink className={({ isActive }) =>
+                    isActive
+                      ? "text-white flex items-center gap-3"
+                      : "flex items-center gap-3"
+                  } to={"/dashboard/bookings"}>My booking</NavLink>
               </li>
             </>
           )}

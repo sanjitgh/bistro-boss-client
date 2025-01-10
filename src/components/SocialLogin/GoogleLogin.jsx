@@ -20,7 +20,7 @@ const GoogleLogin = () => {
       };
       axiosPublic.post("/users", userInfo)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
       });
       Swal.fire({
         position: "top-center",

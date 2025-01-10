@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provaiders/AuthProvaider";
 import { PiShoppingCartSimple } from "react-icons/pi";
 import useCart from "../../../hooks/useCart";
+import useAdmin from "../../../hooks/useAdmin";
+
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const [cart] = useCart();
 
   const links = (
@@ -13,6 +16,8 @@ const Navbar = () => {
       <Link to={"/menu"}>Menu</Link>
       <Link to={"/our-shop/all"}>Our Shop</Link>
       <Link to={"/secret"}>Secret</Link>
+      {user && isAdmin && <Link to={"/dashboard/adminhome"}>Dashboard</Link>}
+      {user && !isAdmin && <Link to={"/dashboard/userhome"}>Dashboard</Link>}
       {user ? (
         <button onClick={() => logOut()} className="btn btn-sm">
           Logout
@@ -58,7 +63,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <Link to={'/dashboard/cart'} className="relative ">
+          <Link to={"/dashboard/cart"} className="relative ">
             <PiShoppingCartSimple className="text-4xl" />
             <div className="rounded-full absolute -bottom-2 -right-3 text-[10px] bg-red-600 p-1">
               <div className="w-3 h-3 flex justify-center items-center">
