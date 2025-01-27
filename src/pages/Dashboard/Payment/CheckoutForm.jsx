@@ -88,6 +88,7 @@ const CheckoutForm = () => {
           menuItemIds: cart.map((item) => item.menuId),
           status: "Panding",
         };
+        
         const res = await axiosSecure.post("/payments", payment);
         if(res.data?.paymentResult?.insertedId){
           Swal.fire({
