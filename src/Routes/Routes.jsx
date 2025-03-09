@@ -116,7 +116,7 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/updateitem/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menu/${params?.id}`),
+          fetch(`https://bistro-boss-server-eight-hazel.vercel.app/menu/${params?.id}`),
         element: (
           <AdminRoute>
             <UpdateItem></UpdateItem>

@@ -12,7 +12,7 @@ import "./style.css";
 const Testimonial = () => {
   const [items, setItems] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/reviews")
+    fetch("https://bistro-boss-server-eight-hazel.vercel.app/reviews")
       .then((res) => res.json())
       .then((data) => setItems(data));
   }, []);

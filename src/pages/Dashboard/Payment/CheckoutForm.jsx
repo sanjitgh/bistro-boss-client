@@ -26,7 +26,6 @@ const CheckoutForm = () => {
           price: totalPrice,
         })
         .then((res) => {
-          console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
